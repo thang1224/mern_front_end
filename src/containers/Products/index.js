@@ -20,6 +20,7 @@ const Products = (props) => {
     const [categoryId, setCategoryId] = useState('');
     const [productPictures, setProductPictures] = useState([]);
     const [show, setShow] = useState(false);
+    const product = useSelector(state => state.product);
     const category = useSelector(state => state.category);
     const dispatch = useDispatch();
 
@@ -75,15 +76,21 @@ const Products = (props) => {
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>2</td>
-                        <td>Table cell</td>
-                        <td>Table cell</td>
-                        <td>Table cell</td>
-                        <td>Table cell</td>
-                        <td>Table cell</td>
-                        <td>Table cell</td>
-                    </tr>
+                    {
+                        product.products.length > 0 ?
+                            product.products.map(product =>
+                                <tr key={product._id}>
+                                    <td>2</td>
+                                    <td>{product.name}</td>
+                                    <td>{product.price}</td>
+                                    <td>{product.quantity}</td>
+                                    <td>{product.description}</td>
+                                    <td>--</td>
+                                    
+                                </tr>
+                            ) : null
+                    }
+
                 </tbody>
             </Table>
         );

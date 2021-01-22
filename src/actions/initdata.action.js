@@ -1,5 +1,5 @@
 import axiosIntance from "../helpers/axios";
-import { initDataConstants } from "./constants"
+import { categoryContants, initDataConstants, productConstants } from "./constants"
 
 export const getInitData = () => {
     return async dispatch => {
@@ -9,9 +9,14 @@ export const getInitData = () => {
 
             const { categories, products } = res.data;
             dispatch({
-                type: initDataConstants.GET_INITDATA_SUCCESS,
+                type: categoryContants.GET_CATEGORY_SUCCESS,
                 payload: { categories }
+            });
+            dispatch({
+                type: productConstants.GET_ALL_PRODUCTS_SUCCESS,
+                payload: { products }
             })
         }
+        console.log(res);
     }
 }
